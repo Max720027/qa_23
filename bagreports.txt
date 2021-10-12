@@ -1,0 +1,12 @@
+1-korotkoe opisanie(Summary)
+2-proekt(Progect)
+3-komponent prilozheniya(component)
+4-nomer versii(version)
+5-ser`yoznost`(severity)
+6-prioretet(priority)
+7-shagi vosproizvedeniya(steps to reproduce)
+8-fakticheskii resultat(actual resul)
+9-ozhidaemii rezultat(Expected result)
+10-dopolnenie(additionalinformation)
+
+
