@@ -1,10 +1,10 @@
-"HOMEWORK":{
+{"HOMEWORK":{
   "name": "MAXIM",
-  "age": 34,
-  "pets": {
-    "cat": "1"
+  "age": "34",
+  "pets":"cat,1"
       },
-  "salary": 
-    "100"    
+  {"salary": 
+    "100"
+}    
    }
 
