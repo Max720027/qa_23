@@ -1,12 +1,12 @@
 GitHub. HW_2
 1. На локальном репозитории сделать ветки для:
-- Postman                                                        git checkout Postman
-- Jmeter                                                         git checkout Jmeter
-- CheckLists                                                     git checkout CheckLists
-- Bag Reports                                                    git checkout BagReport 
-- SQL                                                           git checkout SQL 
-- Charles                                                       git checkout Charles   
-- Mobile testing                                                git checkout Mobile_testing
+- Postman                                                        git checkout -b Postman
+- Jmeter                                                         git checkout -b Jmeter
+- CheckLists                                                     git checkout -b CheckLists
+- Bag Reports                                                    git checkout -b BagReport 
+- SQL                                                           git checkout -b SQL 
+- Charles                                                       git checkout -b Charles   
+- Mobile testing                                                git checkout -b Mobile_testing
 
 2. Запушить все ветки на внешний репозиторий                                      перейти в конкретную ветку(например Postman) и ввести команду git push -u origin postman  или с main   git push origin --all
 3. В ветке Bag Reports сделать текстовый документ со структурой баг репорта        touch bagreports.txt vim bagreports.txt, редактирую и :WQ
