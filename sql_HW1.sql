@@ -27,7 +27,7 @@ select * from students
 where name like '%8';
  --12. ¬ывести пользователей где в имени в есть буква а
 select * from students
-where name like '%a%';
+where name like '%a%' or name like '%а%'; --ј содержитс€ на латыне и на кириллице
  --13. ¬ывести пользователей которые были созданы 2021-07-12 00:00:00
 select * from students
 where created_on= '2021-07-12 00:00:00';
@@ -48,10 +48,10 @@ select * from students
 where id=53;
 -- 19. ¬ывести пользовател€ у которых id больше 40
 select * from students
-where id=40;
+where id>40;
  --20. ¬ывести пользовател€ у которых id меньше 30
 select * from students
-where id=30;
+where id<30;
 -- 21. ¬ывести пользовател€ у которых id меньше 27 или больше 88
 select * from students
 where id<27 or id>88;
