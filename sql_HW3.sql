@@ -1,4 +1,3 @@
-
 --HW3
 select * from employees;
 select * from salary;
@@ -17,17 +16,21 @@ join employees e on es.employee_id=e.id
 join salary s on es.salary_id=s.id
 where monthly_salary < 2000;
 
---3.Вывести все зарплатные позиции, но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.)
-select es.salary_id, s.monthly_salary 
+
+--3.Вывести все зарплатные позиции, но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.) 
+
+select e.employee_name, s.monthly_salary 
 from employee_salary es
-join salary s on es.salary_id=s.id 
-ORDER by salary_id ;
+full outer join employees e on es.employee_id=e.id
+full outer join salary s on es.salary_id=s.id
+where  e.employee_name is null and monthly_salary is not null;
 
 --4. Вывести все зарплатные позиции  меньше 2000 но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.)
-select es.salary_id, s.monthly_salary
+select e.employee_name, s.monthly_salary 
 from employee_salary es
-join salary s on es.salary_id=s.id
-where monthly_salary < 2000;
+full outer join employees e on es.employee_id=e.id
+full outer join salary s on es.salary_id=s.id
+where monthly_salary < 2000 and e.employee_name is null and monthly_salary is not null;
 
 --5. Найти всех работников кому не начислена ЗП.
 select e.employee_name, s.monthly_salary 
@@ -50,12 +53,12 @@ left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
  where roles_name is not null;
 
- --7.Вывести имена и должность только Java разработчиков.
+ --7.Вывести имена и должность только Java разработчиков. 
 select employee_name , roles_name 
 from employees e
 left outer join roles_employee re on re.role_id=e.id
 left outer join roles r on r.id=re.role_id
- where  roles_name  Like '%Java%';
+ where  roles_name  Like '%Java dev%';
 
 
 --8. Вывести имена и должность только Python разработчиков.
@@ -85,15 +88,18 @@ from employees e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
  where  roles_name  Like '%Auto%';
---12.Вывести имена и зарплаты Junior специалистов
-select employee_name , roles_name 
+--12.Вывести имена и зарплаты Junior специалистов  
+select employee_name , s.monthly_salary
 from employees e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
- where  roles_name  Like '%Jun%';
+left outer join employee_salary es on e.id=es.employee_id
+left outer join salary s on s.id=es.salary_id
+ where  roles_name  Like '%Jun%' and s.monthly_salary is not null;
+
 
 --13.Вывести имена и зарплаты Middle специалистов
-select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы 
+select employee_name ФИО ,  s.monthly_salary Бабосы 
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
@@ -102,22 +108,23 @@ left outer join salary s on s.id=es.salary_id
 where  roles_name  Like '%Mid%' and s.monthly_salary is not null;
  ;
  --14. Вывести имена и зарплаты Senior специалистов
-select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы 
+select employee_name ФИО ,  s.monthly_salary Бабосы 
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
 left outer join employee_salary es on e.id=es.employee_id
 left outer join salary s on s.id=es.salary_id
-where  roles_name  Like '%Sen%' and s.monthly_salary is not null;
+where  roles_name  Like '%Sen%' and s.monthly_salary is not null
+;
 
 --15.Вывести зарплаты Java разработчиков
-select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы 
+select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы  -- Должность написал для наглядности
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
 left outer join employee_salary es on e.id=es.employee_id
 left outer join salary s on s.id=es.salary_id
-where  roles_name  Like '%Jav%' and --s.monthly_salary is not null
+where  roles_name  Like '%Jav%' and s.monthly_salary is not null
 ;
 
 -- 16.Вывести зарплаты Python разработчиков
@@ -128,9 +135,10 @@ left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
 left outer join employee_salary es on e.id=es.employee_id
 left outer join salary s on s.id=es.salary_id
-where  roles_name  Like '%Pyt%' --and s.monthly_salary is not null
+where  roles_name  Like '%Pyt%'and s.monthly_salary is not null
 ;
 --17. Вывести имена и зарплаты Junior Python разработчиков
+
 select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы 
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
@@ -157,7 +165,7 @@ left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
 left outer join employee_salary es on e.id=es.employee_id
 left outer join salary s on s.id=es.salary_id
-where  roles_name  Like '%Sen%' and roles_name  Like '%Script%'  
+where  roles_name Like '%Sen%' and roles_name  Like '%Java%' and s.monthly_salary is not null
 ;
 --20. Вывести зарплаты Junior QA инженеров
 select employee_name ФИО , roles_name Должность , s.monthly_salary Бабосы 
@@ -179,7 +187,7 @@ left outer join salary s on s.id=es.salary_id
 where  roles_name  Like '%Jun%' --and s.monthly_salary is not null
 
 --22. Вывести сумму зарплат JS разработчиков
-select avg(s.monthly_salary ) as "Общак JS"
+select sum(s.monthly_salary ) as "Общак JS"
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
@@ -188,7 +196,7 @@ left outer join salary s on s.id=es.salary_id
 where  roles_name  Like '%Script%' 
 ;
 --23. Вывести минимальную ЗП QA инженеров
-select avg(s.monthly_salary ) as "Общак QA"
+select Min(s.monthly_salary ) as "Общак QA"
 from employees  e
 left outer join roles_employee re on re.employee_id=e.id
 left outer join roles r on r.id=re.role_id
@@ -287,8 +295,6 @@ join salary s on s.id=es.salary_id
 where s.monthly_salary in (1100,1500,2000)
 order by s.monthly_salary 
 ;
-
-
 
 ---------------------------------------------------------------------------
 select * from employees;
