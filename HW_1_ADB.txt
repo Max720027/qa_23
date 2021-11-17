@@ -1,0 +1,25 @@
+ADB HW_1
+
+Сценарий напишите в .txt файл.
+.txt сценарий и .log файл прииложения todolist выгружайте на GitHub.
+Ссылкку на гитхаб присылайте в лс.
+
+ 1. Отобразить подключённый девайс в консоли.                                                              .\adb devices
+ 2. Вывести адрес приложения todolist в системе Android                                                      pwd
+ 3. Установить .apk файл приложениия todolist на телефон с компьютера через  ADB                           ./adb install app-debug.apk
+ 4. Сделать скриншот запущенного приложения todolist и сразу скопировать на компьютер в одной команде.        .\adb shell screencap /storage/emulated/0/DCIM/todolist.png   сохранил в фото, ./adb pull /storage/emulated/0/DCIM/todolist.png скопировать на ПК
+ 5. Вывести в консоль логи приложения todolist                                                              .\adb logcat | select-string "todolist"
+ 6. Скопировать логи приложения todolist на компьютер.                                                      .\adb logcat | select-string "todolist" > log_todolist.log    
+ 7. Удалить приложение todolist с телефона через ADB                                                       .\adb uninstall com.android.todolist
+
+
+
+.\adb logcat -c                                                          чистим логиск
+.\adb logcat | select-string "todolist" > log_todolist.log               вывести лог в текстовый в папку
+
+./adb shell 'pm list packages -f'                                 вывести все пути на телефоне
+
+ ./adb shell 'pm list packages -f' |select-string todolist        найти указанный путь в списке
+./adb shell 'pm list packages -f' |grep search todolist           команда вывести путь приложения не работает
+.\adb logcat     вывести все логи
+./adb pull /storage/emulated/0/DCIM/todolist.png /Users/maxim/git/todolist.png    сохранить скрин на комп    не работает, а работает ./adb pull /storage/emulated/0/DCIM/todolist.png просто надо указать путь откуда файл, а перекинет с какой папки работаешь
